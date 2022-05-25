@@ -23,7 +23,7 @@ public class NPCInteractable : Interactable
     }
 
 
-    public override void Interact()
+    public override void Interact(PlayerController player)
     {
         Debug.Log("Interactuando con el NPC " + _name);
         _dialogueManager.SetDialogue(_name, _dialogue);

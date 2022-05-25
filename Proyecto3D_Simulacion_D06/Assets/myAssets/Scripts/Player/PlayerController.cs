@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro; //Libreria para el TextMeshPro
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,6 +27,11 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimation _playerAnim;
     #endregion
 
+    #region Puntaje
+    private int _coins;
+    public TextMeshProUGUI scoreText;
+    #endregion
+
     void Start()
     {
         #region Obtener Rigidbody
@@ -46,6 +52,8 @@ public class PlayerController : MonoBehaviour
 
         _speed = _maxSpeed;
         isRunning = true;
+
+        _coins = 0;
 
     }
 
@@ -118,9 +126,17 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                interacted.Interact();
+                interacted.Interact(this);
             }
         }
+    }
+
+    public void setCoins(int coin)
+    {
+        _coins += coin;
+        Debug.Log("El jugador tiene: " + _coins + " coins");
+        //Cambiar el valor del TextMeshPro cada que se agarre una moneda 
+        scoreText.text = "Score: " + _coins.ToString(); 
     }
 }
 
