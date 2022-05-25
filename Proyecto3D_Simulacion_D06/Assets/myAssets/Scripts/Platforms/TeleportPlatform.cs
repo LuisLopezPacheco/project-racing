@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class TeleportPlatform : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private Transform _WPA;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        //Normalmente el origen de la plataforma esta en el centro
+        Vector3 distBetween = _WPA.position - transform.position; //Hacer que se coloque encima de la plataforma
+        other.transform.position += distBetween; //asignar la posición de la plataforma al jugador
     }
 }

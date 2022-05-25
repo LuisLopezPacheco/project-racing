@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimation _playerAnim;
     #endregion
 
+    private int _puntos;
+
     void Start()
     {
         #region Obtener Rigidbody
@@ -118,9 +120,11 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                interacted.Interact();
+                interacted.Interact(this);
             }
         }
     }
+
+    public void 
 }
 
