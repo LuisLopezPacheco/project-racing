@@ -37,6 +37,7 @@ public class DissapearingPlatform : MonoBehaviour
         other.transform.parent = null;// Excluímos como hijo de la plataforma a cualquier objeto que se separe de ella
     }
 
+    //El IEnumerator permite que el programa produzca cosas como la función WaitForSeconds, que le permite decirle al script que espere sin acaparar la CPU.
     IEnumerator Dissapear()
     {
         Color c = _platformRender.material.color;//Guardar color del material
