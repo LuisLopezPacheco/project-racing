@@ -41,6 +41,7 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         #region Obtener componentes del panel de diálogos
+        _dialoguePnl.SetActive(false); 
         if (_dialoguePnl == null)
         {
             Debug.LogWarning("No se asignó el panel de diálogos al manejador");
