@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance; //Crear instancia
     private Vector3 respawnPosition; // Almacena la posición para respawnear
+    
     public GameObject _deatEffect; //Efecto al morir
-
+    
 
     private void Awake()
     {
@@ -17,10 +19,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        respawnPosition = PlayerController.instance.transform.position; //guardar la posición del jugador al iniciar
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
         
+        respawnPosition = PlayerController.instance.transform.position; //guardar la posición del jugador al iniciar
     }
 
     // Update is called once per frame
@@ -45,7 +47,6 @@ public class GameManager : MonoBehaviour
         {
             //si es par el jugador se muestra, y si no el jugador no se muestra
             playerPiece.SetActive(false);
-            
         }
         UIManager.instance._fadeToBlack = true;
         yield return new WaitForSeconds(2f);
@@ -57,10 +58,16 @@ public class GameManager : MonoBehaviour
         {
             //si es par el jugador se muestra, y si no el jugador no se muestra
             playerPiece.SetActive(true);
-
         }
         HealthManager.instance.ResetHealth(); //Resetear la vida
     }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene("Game Over");
+        
+    }
+
 
     public void SetSpawnPoint(Vector3 newSpawnPoint)
     {

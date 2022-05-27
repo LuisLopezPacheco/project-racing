@@ -7,6 +7,8 @@ public class HealthManager : MonoBehaviour
     public static HealthManager instance;
 
     public int _currentHealth, _maxHealth;
+    [SerializeField]
+    public int _lifes;
     public float _invincibleLength = 2f;
     private float _invincCounter;   //hacer conteo del tiempo de la invincibilidad
 
@@ -57,10 +59,20 @@ public class HealthManager : MonoBehaviour
         {
             _currentHealth--;
             //Validar si la vida llega a cero
-            if(_currentHealth <= 0)
+            if(_currentHealth <= 0) //Si no tiene más energia respawnear
             {
-                _currentHealth = 0;
-                GameManager.instance.Respawn();
+                _lifes--;
+                if(_lifes == 0)
+                {
+                    GameManager.instance.GameOver();
+                    Debug.Log("GAME OVER");
+                    //GAME OVER
+                }
+                else
+                {
+                    _currentHealth = 0;
+                    GameManager.instance.Respawn();
+                }
             }
             else
             {
@@ -89,8 +101,9 @@ public class HealthManager : MonoBehaviour
         UpdateUI(); //Actualizar la vida del jugador
     }
 
+    //Mostrar vidas
     public void UpdateUI()
     {
-        UIManager.instance.healhText.text = _currentHealth.ToString();
+        UIManager.instance.healhText.text = "Energia: " + _currentHealth + "    Vidas: " + _lifes;
     }
 }

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -36,12 +38,18 @@ public class PlayerController : MonoBehaviour
     #endregion
 
 
+
     private int _puntos;
 
     public bool _isKnocking; //activar y desactivar Knockback
     public float _knockBackLength = .5f;
     private float _knockBackCounter;
     public Vector2 _knockBackPower;
+
+    #region Puntaje
+    private int _coins;
+    public TextMeshProUGUI scoreText;
+    #endregion
 
     public GameObject[] _playerPieces;
 
@@ -52,8 +60,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-
-      
+        _coins = 0;
 
         #region Vida jugador
         _hp = _maxHp;
@@ -172,12 +179,12 @@ public class PlayerController : MonoBehaviour
                 interacted.Interact(this);
             }
         }
-        else if (collider.CompareTag("Coin"))
+        else if (collider.gameObject.CompareTag("Finish"))
         {
-            Destroy(collider.gameObject);
-            _hp -= _hp;
-            _barravida.fillAmount -= 0.1f; 
+            SceneManager.LoadScene("Win");
         }
+        
+        
     }
 
     public void KnockBack()
@@ -186,6 +193,14 @@ public class PlayerController : MonoBehaviour
         _knockBackCounter = _knockBackLength;
         
     }
-    
+
+    public void setCoins(int coin)
+    {
+        _coins += coin;
+        Debug.Log("El jugador tiene: " + _coins + " coins");
+        //Cambiar el valor del TextMeshPro cada que se agarre una moneda 
+        scoreText.text = "Score: " + _coins.ToString();
+    }
+
 }
 

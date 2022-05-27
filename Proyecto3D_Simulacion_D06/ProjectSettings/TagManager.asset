@@ -7,11 +7,12 @@ TagManager:
   - Ground
   - Interactable
   - Coin
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 

@@ -8,12 +8,16 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    [SerializeField]
     public Image _BlackScreen;
+    
+    public GameObject _GameOver;
+    
+    
     public float _fadeSpeed;
     public bool _fadeToBlack, _fadeFromBlack;
 
     public Text healhText;
+    public Text lifesText;
 
     private void Awake()
     {
@@ -23,7 +27,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame

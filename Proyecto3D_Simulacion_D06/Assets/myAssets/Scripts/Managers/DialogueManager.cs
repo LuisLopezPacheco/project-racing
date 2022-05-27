@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    private static DialogueManager _instance;
+    public  static DialogueManager _instance;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class DialogueManager : MonoBehaviour
 
     #region Variables del panel de diálogos
     [SerializeField]
-    private GameObject _dialoguePnl;
+    public GameObject _dialoguePnl;
 
     private Button _nextBttn;
     private TextMeshProUGUI _dialogueTxt, _nameTxt, _nextTxt;
