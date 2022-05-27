@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -7356754239016859076}
   - component: {fileID: -8095464264043843240}
   - component: {fileID: 3408730717760121651}
+  - component: {fileID: -2108213852011218982}
   m_Layer: 0
   m_Name: GoldCoin
   m_TagString: Interactable
@@ -77,6 +78,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coins: 1
+--- !u!95 &-2108213852011218982
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498403948531744}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29daddcfeb82c3a4982d8d4cb4190064, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1667978803413412
 GameObject:
   m_ObjectHideFlags: 0
