@@ -2,13 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Points : Interactable
+public class DestroyOverTime : MonoBehaviour
 {
-    
-    public virtual void Interact(PlayerController player)
-    {
-        //Destroy();
-    }
+    public float lifeTime;
 
     // Start is called before the first frame update
     void Start()
@@ -19,8 +15,6 @@ public class Points : Interactable
     // Update is called once per frame
     void Update()
     {
-        
+        Destroy(gameObject,lifeTime);
     }
-
-
 }

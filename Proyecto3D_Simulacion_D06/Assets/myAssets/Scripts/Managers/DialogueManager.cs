@@ -40,6 +40,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        _dialoguePnl.SetActive(false);
         #region Obtener componentes del panel de diálogos
         if (_dialoguePnl == null)
         {
@@ -54,10 +55,10 @@ public class DialogueManager : MonoBehaviour
             {
                 Debug.LogError("El panel de diálogo no tiene un primer hijo TMP");
             }
-            else
-            {
-                _dialogueTxt.text = "Diálogos inicializados";
-            }
+            //else
+            //{
+            //    _dialogueTxt.text = "Diálogos inicializados";
+            //}
             #endregion
             #region Obtener texto de nombre NPC
             //Buscar el componente TMP en el primer hijo del segundo hijo del panel
@@ -66,10 +67,10 @@ public class DialogueManager : MonoBehaviour
             {
                 Debug.LogError("No hay un TMP como primer hijo del segundo hijo del panel");
             }
-            else
-            {
-                _nameTxt.text = "Nombre inicializado";
-            }
+            //else
+            //{
+            //    _nameTxt.text = "Nombre inicializado";
+            //}
             #endregion
             #region Obtener el botón y poner listener
             //Buscar el componente Button en el tercer hijo del panel
@@ -87,10 +88,10 @@ public class DialogueManager : MonoBehaviour
                 {
                     Debug.LogWarning("El botón de continuar no tiene texto");
                 }
-                else
-                {
-                    _nextTxt.text = "Botón inicializado";
-                }
+                //else
+                //{
+                //    _nextTxt.text = "Botón inicializado";
+                //}
                 #endregion
             }
             #endregion

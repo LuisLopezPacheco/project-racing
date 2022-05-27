@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
     private Rigidbody _playerRB;
 
     #region Variables Movimiento
@@ -26,10 +28,38 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimation _playerAnim;
     #endregion
 
+    #region Barravida y Vida
+    [SerializeField]
+    private Image _barravida;
+    [SerializeField]
+    private float _hp, _maxHp = 40f;
+    #endregion
+
+
     private int _puntos;
+
+    public bool _isKnocking; //activar y desactivar Knockback
+    public float _knockBackLength = .5f;
+    private float _knockBackCounter;
+    public Vector2 _knockBackPower;
+
+    public GameObject[] _playerPieces;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
+
+      
+
+        #region Vida jugador
+        _hp = _maxHp;
+        //_barravida.fillAmount = _hp/_maxHp;
+        #endregion
+
         #region Obtener Rigidbody
         _playerRB = GetComponent<Rigidbody>();
         if (_playerRB == null)
@@ -53,6 +83,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
         #region Revisar si corre o camina
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -70,15 +101,33 @@ public class PlayerController : MonoBehaviour
 
 
         #region Movimiento
-        _horizontalInput = Input.GetAxis("Horizontal"); //AD izquierda derecha
-        _forwardInput = Input.GetAxis("Vertical"); //WS arriba abajo
+        if (!_isKnocking)
+        {
+            _horizontalInput = Input.GetAxis("Horizontal"); //AD izquierda derecha
+            _forwardInput = Input.GetAxis("Vertical"); //WS arriba abajo
 
-        float velocity = Mathf.Max(Mathf.Abs(_horizontalInput), Mathf.Abs(_forwardInput));
-        velocity = velocity * _speed / _maxSpeed;
-        _playerAnim.setSpeed(velocity);
+            float velocity = Mathf.Max(Mathf.Abs(_horizontalInput), Mathf.Abs(_forwardInput));
+            velocity = velocity * _speed / _maxSpeed;
+            _playerAnim.setSpeed(velocity);
 
-        Vector3 movement = new Vector3(_horizontalInput, 0, _forwardInput);
-        transform.Translate(movement * _speed * Time.deltaTime);
+            Vector3 movement = new Vector3(_horizontalInput, 0, _forwardInput);
+            transform.Translate(movement * _speed * Time.deltaTime);
+        }
+
+        if (_isKnocking)
+        {
+            _knockBackCounter -= Time.deltaTime;
+            //float yStore = moveDirection.y;
+            //moveDirection = (transform.forward * _knockBackPower.x);
+            //moveDirection.y = yStore;
+            //charController
+
+
+            if (_knockBackCounter <= 0)
+            {
+                _isKnocking = false;
+            }
+        }
         #endregion
 
         #region Salto
@@ -123,8 +172,20 @@ public class PlayerController : MonoBehaviour
                 interacted.Interact(this);
             }
         }
+        else if (collider.CompareTag("Coin"))
+        {
+            Destroy(collider.gameObject);
+            _hp -= _hp;
+            _barravida.fillAmount -= 0.1f; 
+        }
     }
 
+    public void KnockBack()
+    {
+        _isKnocking = true;
+        _knockBackCounter = _knockBackLength;
+        
+    }
     
 }
 
